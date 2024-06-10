@@ -38,7 +38,12 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->category_id = $request->category_id;
-        $product->file ="";
+        if ($request->hasFile("file")) {
+            move_uploaded_file($_FILES['file']['tmp_name'], 'db/products/' . $_FILES['file']['name']);
+            $product->file = $_FILES['file']['name'];
+        } else {
+            $product->file = '';
+        }
         $product->save();
 
         return back()->with('success', 'Produit ajouté avec succès');
@@ -58,8 +63,11 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         $product = Product::find($id);
+        $categories = Category::all();
         return view("products.edit", [
-            "product"=> $product
+            "product"=> $product,
+            "categories"=> $categories
+
         
         ]);
 
@@ -72,9 +80,17 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->category_id = $request->category_id;
+        if ($request->hasFile("file")) {
+            move_uploaded_file($_FILES['file']['tmp_name'], 'db/products/' . $_FILES['file']['name']);
+            $product->file = $_FILES['file']['name'];
+        } else {
+            $product->file = '';
+        }
         $product->save();
-        return redirect()->route('product.list')->with("success", "Produit mise à jour avec succès");
-        
+        return redirect()->route("product.list")->with("success", "Produit modifiée avec succès");
     }
 
     /**

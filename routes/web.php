@@ -18,7 +18,7 @@ Route::post('/categories/store', [App\Http\Controllers\CategoryController::class
 
 Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name("categories.list");
 
-Route::get('/categories/{id}/edit', [App\Http\Controllers\CategoryController::class, 'edit'])->name("category.edit");
+Route::get('/categories/{id}/edit', [App\Http\Controllers\CategoryController::class, 'edit'])->name("categories.edit");
 
 Route::post('/categories/{id}/update', [App\Http\Controllers\CategoryController::class, 'update'])->name("category.update");
 

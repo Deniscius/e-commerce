@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
-{   use HasFactory;
-
-    public function Category(): HasOne{
+{   
+    use HasFactory;
+    public function Category(): HasOne
+    {
         return $this->hasOne(Category::class);
     }
-    
 }
