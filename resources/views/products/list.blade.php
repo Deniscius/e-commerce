@@ -21,7 +21,7 @@
                         <p class="card-text">{{ $product->price }} F CFA</p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Nom de la catégorie</li>
+                        <li class="list-group-item">{{ {{ App\Models\Category::find($product->category_id)->name }} }}</li>
                     </ul>
                     <div class="card-body">
                         <a href="{{ route('product.edit', $product->id) }}" class="card-link">Modifier</a>
